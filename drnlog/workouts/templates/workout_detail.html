@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workout Log</title>
+</head>
+<body>
+    <h1>Workout Log</h1>
+    <ul>
+        {% for workout in workouts %}
+        <lil>
+            <a href="{% url 'workout_detail' workout.id%}">
+                {{ workout.name }} - {{ workout.date }}
+            </a>
+        </lil>
+        {% empty %}
+            <li>No workout logged yet</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
