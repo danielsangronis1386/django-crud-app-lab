@@ -17,7 +17,17 @@ def workout_create(request):
         name = request.POST.get('name')
         duration = request.POST.get('duration')
         notes = request.POST.get('notes')
-
         Workout.objects.create(name=name, duration=duration, notes=notes)
+        return redirect('workout_list')
+
+def workout_update(request, pk):
+    workout = get_object_or_404(Workout, pk=pk)
+
+    if request.method == 'POST':
+        workout.name = request.POST.get('name')
+        workout.duration = request.POST.get('duration')
+        workout.notes = request.POST.get('notes')
+        workout.save()
+        return redirect('workout_detail', pk=workout.id)
     
-    return render(request, 'workouts/workout_form.html')
+    return render(request, 'workouts/workout_form.html', {'workout': workout})
