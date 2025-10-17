@@ -5,6 +5,9 @@
 </head>
 <body>
     <h1>Workout Log</h1>
+    
+    <p><a href="{% url 'workout_create' %}"> Add a new workout</a></p>
+
     <ul>
         {% for workout in workouts %}
         <lil>

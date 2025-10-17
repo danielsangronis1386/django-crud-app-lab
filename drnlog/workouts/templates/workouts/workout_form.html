@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Workout</title>
+</head>
+<body>
+    <h1> Add a Workout</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="required"><br><br>
+
+        <label for="duration">Duration (minutes): </label><br>
+        <input type="number" id="duration" name="duration" required><br><br>
+
+        <button type="submit"> Save</button>
+    </form>
+
+    <p><a href="{% url 'workout_list% }">Back to all workouts</a></p>
+    
+</body>
+</html>
