@@ -35,3 +35,14 @@ def workout_update(request, pk):
         return redirect('workout_detail', pk=workout.id)
     
     return render(request, 'workouts/workout_form.html', {'workout': workout})
+
+#DELETE VIEW 
+
+def workout_delete(request, pk):
+    workout = get_object_or_404(Workout, pk=pk)
+
+    if request.method == 'POST':
+        workout.delete()
+        return redirect('workout_list')
+    
+    return render(request, 'workouts/workout_confirm_delete.html',{'workout': workout})
