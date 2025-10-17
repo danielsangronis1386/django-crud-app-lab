@@ -12,15 +12,15 @@
         <input type="text" id="name" name="name" value="{{ workout.name|default_if_none:'' }}" required><br><br>
 
         <label for="duration">Duration (minutes):</label><br>
-        <input type="number" id="duration" name="duration" value="{{ workout.duration|default_if_none: '' }}" required><br><br>
+        <input type="number" id="duration" name="duration" value="{{ workout.duration|default_if_none:'' }}" required><br><br>
 
         <label for="notes">Notes:</label><br>
-        <textarea id="notes" name="notes" rows="4">{{ workout.notes|default_if_none: ''}}</textarea><br><br>
+        <textarea id="notes" name="notes" rows="4">{{ workout.notes|default_if_none:'' }}</textarea><br><br>
 
         <button type="submit"> Save</button>
     </form>
 
-    <p><a href="{% url 'workout_list% }">Back to all workouts</a></p>
+    <p><a href="{% url 'workout_list' % }">Back to all workouts</a></p>
     
 </body>
 </html>

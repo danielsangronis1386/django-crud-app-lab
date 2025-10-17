@@ -12,6 +12,7 @@ def workout_detail(request, pk):
     workout = get_object_or_404(Workout, pk=pk)
     return render(request, 'workouts/workout_detail.html', {'workout': workout})
 
+#CREATE VIEW
 def workout_create(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -19,7 +20,10 @@ def workout_create(request):
         notes = request.POST.get('notes')
         Workout.objects.create(name=name, duration=duration, notes=notes)
         return redirect('workout_list')
+    
+    return render(request, 'workouts/workout_form.html')
 
+#UPDATE VIEW
 def workout_update(request, pk):
     workout = get_object_or_404(Workout, pk=pk)
 
