@@ -1,5 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Workout
+from django.http import HttpResponse
+
+#HOME VIEW 
+def home(request):
+    return render(request, 'workouts/home.html')
 
 #lIST OF VIEW - SHOW ALL WORKOUTS 
 def workout_list(request):
