@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Workout</title>
+</head>
+<body>
+    <h1>Delete Workout</h1>
+    <p>Are you sure want to delete "<strong>{{ workout.name }}</strong>"?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+    </form>
+    
+    <p> <a href="{% url 'workout_detail' workout.id %}"> Cancel</a></p>
+</body>
+</html>
