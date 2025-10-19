@@ -19,29 +19,20 @@ def workout_detail(request, pk):
 
 #CREATE VIEW
 def workout_create(request):
-    from .models import Category
-
     if request.method == 'POST':
         name = request.POST.get('name')
         duration = request.POST.get('duration')
         notes = request.POST.get('notes')
-        category_id = request.POST.get('category')
-
-
-        category = Category.objects.get(id=category_id)
-
 
         Workout.objects.create(
-            name=name, 
-            duration=duration, 
-            notes=notes,
-            categoy=category
+            name=name,
+            duration=duration,
+            notes=notes
         )
         return redirect('workout_list')
-    # if GET send available categories tot he form 
 
-    categories = Category.objects.all()
-    return render(request, 'workouts/workout_form.html', {'categories': categories})
+    return render(request, 'workouts/workout_form.html')
+
 
 #UPDATE VIEW
 def workout_update(request, pk):

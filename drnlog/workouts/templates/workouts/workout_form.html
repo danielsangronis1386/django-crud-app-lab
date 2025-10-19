@@ -4,7 +4,7 @@
     <title>New Workout</title>
 </head>
 <body>
-    <h1> Add a Workout</h1>
+    <h1>Add a Workout</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
@@ -16,17 +16,10 @@
 
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes" rows="4">{{ workout.notes|default_if_none:'' }}</textarea><br><br>
-        <label for="category">Category:</label><br>
-        <select id="category" name="category"> 
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
 
-        <button type="submit"> Save</button>
+        <button type="submit">Save</button>
     </form>
 
-    <p><a href="{% url 'workout_list' % }">Back to all workouts</a></p>
-    
+    <p><a href="{% url 'workout_list' %}">Back to all workouts</a></p>
 </body>
 </html>
