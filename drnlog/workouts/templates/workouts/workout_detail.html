@@ -19,6 +19,8 @@
                 {% if exercise.weight %}
                     - {{ exercise.weight }} lbs
                 {% endif %}
+                <a href="{% url 'exercise_update' exercise.id %}">Edit</a> |
+                <a href="{% url 'exercise_delete' exercise.id %}">Delete</a>
             </li>
          {% empty %}
             <li>No exercises added yet.</li>
