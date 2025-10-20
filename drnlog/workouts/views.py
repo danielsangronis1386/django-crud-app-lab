@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Workout
+from .models import Workout, Exercise
 from django.http import HttpResponse
 
 #HOME VIEW 
@@ -57,3 +58,29 @@ def workout_delete(request, pk):
         return redirect('workout_list')
     
     return render(request, 'workouts/workout_confirm_delete.html',{'workout': workout})
+
+
+# EXERCISE CREATE VIEW 
+
+def exercise_create(request, workout_id):
+    workout = get_object_or_404(Workout, pk=workout_id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        sets = request.POST.get('sets')
+        reps = request.POST.get('reps')
+        weight = request.POST.get('weight')
+
+        Exercise.objects.create(
+            workout=workout,
+            name=name,
+            category=category,
+            sets=sets,
+            reps=reps,
+            weight=weight
+        )
+        return redirect('workout_detail', pk=workout.id)
+    
+    return render(request, 'workouts/exercise_form.html', {'workout': workout})
+

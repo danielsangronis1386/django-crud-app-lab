@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Exercise</title>
+</head>
+<body>
+    <h1>Add Exercise to {{ workout.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name"> Exercise Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="category">Category:</label><br>
+        <input type="text" id="category" name="category"><br><br>
+
+        <label for="sets">Sets:</label><br>
+        <input type="number" id="sets" name="sets" required><br><br>
+
+        <label for="reps">Reps:</label><br>
+        <input type="number" id="reps" name="reps" required><br><br>
+
+        <label for="weight">Weight (lbs):</label><br>
+        <input type="number" id="weight" name="weight" step="any"><br><br>
+
+        <button type="submit">Save</button>
+
+    </form>
+    
+    <p><a href="{% url 'workout_detail' workout.id %}">Back to workout</a></p>
+</body>
+</html>
