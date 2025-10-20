@@ -84,3 +84,19 @@ def exercise_create(request, workout_id):
     
     return render(request, 'workouts/exercise_form.html', {'workout': workout})
 
+#EXERCISE UPDATE VIEW 
+
+def exercise_update(request, pk):
+    exercise = get_object_or_404(Exercise, pk=pk)
+
+    if request.method == 'POST':
+        exercise.name = request.POST.get('name')
+        exercise.category = request.POST.get('category')
+        exercise.sets = request.POST.get('sets')
+        exercise.reps = request.POST.get('reps')
+        exercise.weight = request.POST.get('weight')
+        exercise.save()
+        return redirect('workout_detail', pk=exercise.workout.id)
+    
+    return render(request, 'workouts/exercise_form.html', {'exercise': exercise, 'workout': exercise.workout})
+
