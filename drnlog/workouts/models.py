@@ -24,7 +24,7 @@ class Exercise(models.Model):
         ('Core', 'Core')
     ]
 
-    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name='excercises')
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name='exercises')
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     sets = models.PositiveBigIntegerField(default=3)
