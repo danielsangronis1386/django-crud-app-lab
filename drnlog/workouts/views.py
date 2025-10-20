@@ -100,3 +100,15 @@ def exercise_update(request, pk):
     
     return render(request, 'workouts/exercise_form.html', {'exercise': exercise, 'workout': exercise.workout})
 
+#EXERCISE DELETE VIEW 
+def exercise_delete(request, pk):
+    exercise = get_object_or_404(Exercise, pk=pk)
+    workout = exercise.workout
+
+    if request.method == 'POST':
+        exercise.delete()
+        return redirect('workout_detail', pk=workout.id)
+    
+    return render(request, 'workouts/exercise_confirm_delete.html', {'exercise': exercise})
+
+
