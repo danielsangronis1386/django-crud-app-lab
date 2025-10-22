@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Workout
-from .models import Workout, Exercise
-from django.http import HttpResponse
+from .models import Workout, Exercise, MusclePart
+
 
 #HOME VIEW 
 def home(request):
@@ -110,5 +109,45 @@ def exercise_delete(request, pk):
         return redirect('workout_detail', pk=workout.id)
     
     return render(request, 'workouts/exercise_confirm_delete.html', {'exercise': exercise})
+
+# LIST VIEW - show all muscle parts 
+def musclepart_list(request):
+    muscle_parts = MusclePart.objects.all()
+    return render(request, 'workouts/musclepart_list.html', {'muscle_parts': muscle_parts})
+
+# DETAIL VIEW - show one muscle part
+def muscle_detail(request, pk):
+    muscle_part = get_object_or_404(MusclePart, pk=pk)
+    return render(request, 'workouts/musclepart_detail.html', {'muscle_part':muscle_part})
+
+# CREATE VIEW - add a new muscle part
+def musclepart_create(request):
+    if request.method =='POST':
+        name = request.POST.get('name')
+        MusclePart.objects.create(name=name)
+        return redirect('musclepart_list')
+    return render(request, 'workouts/musclepart_form.html')
+
+# UPDATE VIEW - edit a muscle part
+def muscle_part_update(request,pk):
+    muscle_part =get_object_or_404(MusclePart, pk=pk)
+    if request.method == 'POST':
+        muscle_part.name = request.POST.get('name')
+        muscle_part.save()
+        return redirect('musclepart_detail', pk=muscle_part.id)
+    return render(request, 'workout/musclepart_form.html', {'muscle_part': muscle_part})
+
+# DELETE VIEW - remove a musclepart
+def musclepart_delete(request, pk):
+    muscle_part = get_object_or_404(MusclePart, pk=pk)
+    if request.method =='POST':
+        muscle_part.delete()
+        return redirect('musclepart_list')
+    return render(request, 'workout/musclepart_confirm_delete.html', {'muscle_part': muscle_part})
+
+
+
+
+
 
 
