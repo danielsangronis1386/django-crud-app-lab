@@ -12,6 +12,11 @@ class Workout(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse('workout_detail', kwargs={'pk': self.id})
+    
+class MuscleGroup(models.Model):
+     name = models.CharField(max_length=50)
+     def __str__(self):
+          return self.name
 
 
 class Exercise(models.Model):
@@ -32,7 +37,10 @@ class Exercise(models.Model):
     weight = models.FloatField(default=0, help_text="Lb")
     notes = models.TextField(blank=True)
 
+#Third Model with Associations
 
-    def __str__(self):
+muscle_groups = models.ManyToManyField(MuscleGroup, blank=True)    
+
+def __str__(self):
         return f"{self.name} ({self.category})"
 
