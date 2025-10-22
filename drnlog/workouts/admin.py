@@ -1,14 +1,7 @@
 from django.contrib import admin
-from . models import Workout, Exercise
+from .models import Workout, Exercise, MusclePart
 
-@admin.register(Workout)
-class WorkoutAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'duration')
-    search_fields = ('name',)
-
-@admin.register(Exercise)
-class ExerciseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'workout', 'sets', 'reps', 'weight')
-    list_filter = ('category', 'workout')
-    search_fields = ('name',)
+admin.site.register(Workout)
+admin.site.register(Exercise)
+admin.site.register(MusclePart)
 
