@@ -95,6 +95,7 @@ def exercise_create(request, workout_id):
 
 def exercise_update(request, pk):
     exercise = get_object_or_404(Exercise, pk=pk)
+    workout = exercise.workout
 
     if request.method == 'POST':
         exercise.name = request.POST.get('name')
@@ -102,10 +103,21 @@ def exercise_update(request, pk):
         exercise.sets = request.POST.get('sets')
         exercise.reps = request.POST.get('reps')
         exercise.weight = request.POST.get('weight')
+        muscle_parts = request.POST.getlist('muscle_parts')
+
         exercise.save()
+        exercise.muscle_parts.set(muscle_parts)
         return redirect('workout_detail', pk=exercise.workout.id)
     
-    return render(request, 'workouts/exercise_form.html', {'exercise': exercise, 'workout': exercise.workout})
+    from .models import MusclePart
+    muscle_parts = MusclePart.objects.all()
+    return render(request, 'workouts/exercise_form.html', {
+        'exercise': exercise,
+        'workout': workout,
+        'muscle_parts': muscle_parts
+
+    })
+    
 
 #EXERCISE DELETE VIEW 
 def exercise_delete(request, pk):
