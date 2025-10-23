@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Muscle Parts</title>
+</head>
+<body>
+    <h1>All Muscle Parts</h1>
+
+    <ul>
+        {% for part in muscle_parts %}
+        <lil>
+            <a href="{% url 'musclepart_detail' part.id %}"> {{ part.name }}</a>
+        </lil>
+        {% empty %}
+        <lil>No muscle parts found.</lil>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'musclepart_create' %}">Add New Muscle Part</a></p>
+    <p><a href="{% url 'musclepart_list %}">Back to Workouts</a></p>
+</body>
+</html>
