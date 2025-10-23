@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Workout, Exercise, MusclePart
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 
 #HOME VIEW 
-def home(request):
-    return render(request, 'workouts/home.html')
+class home(LoginView):
+    template_name = 'home.html'
 
 #lIST OF VIEW - SHOW ALL WORKOUTS 
 def workout_list(request):
@@ -164,6 +167,21 @@ def musclepart_delete(request, pk):
         muscle_part.delete()
         return redirect('musclepart_list')
     return render(request, 'workouts/musclepart_confirm_delete.html', {'muscle_part': muscle_part})
+
+# SIGNUP VIEW
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('workout_list')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    return render(request, "registration/signup.html", {'form': form, 'error_message': error_message})
 
 
 

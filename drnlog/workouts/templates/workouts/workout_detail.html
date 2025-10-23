@@ -14,11 +14,19 @@
         {% for exercise in workout.exercises.all %}
 
             <li>
-                <strong>{{ exercise.name }}</strong>
+                <strong>{{ exercise.name }}</strong> 
                 ({{ exercise.category }}) – {{ exercise.sets }} sets × {{ exercise.reps }} reps
-                {% if exercise.weight %}
-                    - {{ exercise.weight }} lbs
+                {% if exercise.weight %} - {{ exercise.weight }} lbs{% endif %}
+                <br>
+                {% if exercise.muscle_parts.all %}
+                    <small>
+                        Target:
+                        {% for part in exercise.muscle_parts.all %}
+                            {{ part.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </small>
                 {% endif %}
+                <br>
                 <a href="{% url 'exercise_update' exercise.id %}">Edit</a> |
                 <a href="{% url 'exercise_delete' exercise.id %}">Delete</a>
             </li>
