@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ muscle_part.name }}</title>
+</head>
+<body>
+    <h1>{{ muscle_part.name }}</h1>
+
+    <p> 
+        <a href="{% url 'musclepart_update' muscle_part.id %}">Edit</a> |
+        <a href="{% url 'musclepart_delete' muscle_part.id %}">Delete</a>
+    </p>
+    
+    <p><a href="{% url 'musclepart_list' %}">Back to all Muscle Parts</a></p>
+</body>
+</html>
