@@ -30,6 +30,13 @@
         <label for="weight">Weight (lbs):</label><br>
         <input type="number" id="weight" name="weight" step="any"><br><br>
 
+        <label for="muscle_parts">Muscle Parts:</label><br>
+        <select id="muscle_parts" name="muscle_parts" multiple>
+            {% for part in muscle_parts %}
+                <option value="{{ part.id }}">{{ part.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
         <button type="submit">Save</button>
 
     </form>

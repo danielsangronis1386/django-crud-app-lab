@@ -70,8 +70,9 @@ def exercise_create(request, workout_id):
         sets = request.POST.get('sets')
         reps = request.POST.get('reps')
         weight = request.POST.get('weight')
+        muscle_parts = request.POST.getlist('muscle_parts')
 
-        Exercise.objects.create(
+        exercise = Exercise.objects.create(
             workout=workout,
             name=name,
             category=category,
@@ -79,10 +80,17 @@ def exercise_create(request, workout_id):
             reps=reps,
             weight=weight
         )
+        exercise.muscle_parts.set(muscle_parts)
         return redirect('workout_detail', pk=workout.id)
     
-    return render(request, 'workouts/exercise_form.html', {'workout': workout})
-
+    from .models import MusclePart
+    muscle_parts = MusclePart.objects.all()
+    return render(request, 'workouts/exercise_form.html', {
+        'workout': workout,
+        'muscle_parts': muscle_parts
+        
+    })
+    
 #EXERCISE UPDATE VIEW 
 
 def exercise_update(request, pk):
@@ -116,7 +124,7 @@ def musclepart_list(request):
     return render(request, 'workouts/musclepart_list.html', {'muscle_parts': muscle_parts})
 
 # DETAIL VIEW - show one muscle part
-def muscle_detail(request, pk):
+def musclepart_detail(request, pk):
     muscle_part = get_object_or_404(MusclePart, pk=pk)
     return render(request, 'workouts/musclepart_detail.html', {'muscle_part':muscle_part})
 
@@ -129,7 +137,7 @@ def musclepart_create(request):
     return render(request, 'workouts/musclepart_form.html')
 
 # UPDATE VIEW - edit a muscle part
-def muscle_part_update(request,pk):
+def musclepart_update(request,pk):
     muscle_part =get_object_or_404(MusclePart, pk=pk)
     if request.method == 'POST':
         muscle_part.name = request.POST.get('name')
@@ -143,7 +151,7 @@ def musclepart_delete(request, pk):
     if request.method =='POST':
         muscle_part.delete()
         return redirect('musclepart_list')
-    return render(request, 'workout/musclepart_confirm_delete.html', {'muscle_part': muscle_part})
+    return render(request, 'workouts/musclepart_confirm_delete.html', {'muscle_part': muscle_part})
 
 
 
