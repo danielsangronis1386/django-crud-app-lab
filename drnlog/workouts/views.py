@@ -143,7 +143,7 @@ def musclepart_update(request,pk):
         muscle_part.name = request.POST.get('name')
         muscle_part.save()
         return redirect('musclepart_detail', pk=muscle_part.id)
-    return render(request, 'workout/musclepart_form.html', {'muscle_part': muscle_part})
+    return render(request, 'workouts/musclepart_form.html', {'muscle_part': muscle_part})
 
 # DELETE VIEW - remove a musclepart
 def musclepart_delete(request, pk):
