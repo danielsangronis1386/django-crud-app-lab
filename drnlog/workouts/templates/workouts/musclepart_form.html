@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if muscle_part %}Edit{% else %}Add{% endif %} Muscle Part</title>
+</head>
+<body>
+    <h1>{% if muscle_part %}Edit{% else %}Add{% endif %} Muscle Part</h1>
+
+    <form method="POST">
+         {% csrf_token %}
+         <label> for="name>Name:</label><br>
+         <input type="text" id="name" name="name" value="{{ muscle_part.name|default_if_none:''}}" required><br><br>
+         <button type="submit">Save</button>
+    </form>
+
+    <p><a href="{% url 'musclepart-list' %}">Back</a></p>
+</body>
+</html>
