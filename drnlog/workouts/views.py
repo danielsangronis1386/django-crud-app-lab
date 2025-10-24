@@ -3,6 +3,8 @@ from .models import Workout, Exercise, MusclePart
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+
 
 
 #HOME VIEW 
@@ -10,17 +12,22 @@ class home(LoginView):
     template_name = 'home.html'
 
 #lIST OF VIEW - SHOW ALL WORKOUTS 
+@login_required
+
 def workout_list(request):
     workouts = Workout.objects.all().order_by('-date')
     return render(request, 'workouts/workout_list.html', {'workouts': workouts})
 
 #DETAIL VIEW SHOW ONE WORKOUT BY ID 
+@login_required
 
 def workout_detail(request, pk):
     workout = get_object_or_404(Workout, pk=pk)
     return render(request, 'workouts/workout_detail.html', {'workout': workout})
 
 #CREATE VIEW
+@login_required
+
 def workout_create(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -38,6 +45,8 @@ def workout_create(request):
 
 
 #UPDATE VIEW
+@login_required
+
 def workout_update(request, pk):
     workout = get_object_or_404(Workout, pk=pk)
 
@@ -51,6 +60,7 @@ def workout_update(request, pk):
     return render(request, 'workouts/workout_form.html', {'workout': workout})
 
 #DELETE VIEW 
+@login_required
 
 def workout_delete(request, pk):
     workout = get_object_or_404(Workout, pk=pk)
@@ -63,6 +73,9 @@ def workout_delete(request, pk):
 
 
 # EXERCISE CREATE VIEW 
+
+@login_required
+
 
 def exercise_create(request, workout_id):
     workout = get_object_or_404(Workout, pk=workout_id)
@@ -96,6 +109,9 @@ def exercise_create(request, workout_id):
     
 #EXERCISE UPDATE VIEW 
 
+@login_required
+
+
 def exercise_update(request, pk):
     exercise = get_object_or_404(Exercise, pk=pk)
     workout = exercise.workout
@@ -123,6 +139,9 @@ def exercise_update(request, pk):
     
 
 #EXERCISE DELETE VIEW 
+
+@login_required
+
 def exercise_delete(request, pk):
     exercise = get_object_or_404(Exercise, pk=pk)
     workout = exercise.workout
@@ -134,16 +153,22 @@ def exercise_delete(request, pk):
     return render(request, 'workouts/exercise_confirm_delete.html', {'exercise': exercise})
 
 # LIST VIEW - show all muscle parts 
+@login_required
+
 def musclepart_list(request):
     muscle_parts = MusclePart.objects.all()
     return render(request, 'workouts/musclepart_list.html', {'muscle_parts': muscle_parts})
 
 # DETAIL VIEW - show one muscle part
+@login_required
+
 def musclepart_detail(request, pk):
     muscle_part = get_object_or_404(MusclePart, pk=pk)
     return render(request, 'workouts/musclepart_detail.html', {'muscle_part':muscle_part})
 
 # CREATE VIEW - add a new muscle part
+@login_required
+
 def musclepart_create(request):
     if request.method =='POST':
         name = request.POST.get('name')
@@ -152,6 +177,8 @@ def musclepart_create(request):
     return render(request, 'workouts/musclepart_form.html')
 
 # UPDATE VIEW - edit a muscle part
+@login_required
+
 def musclepart_update(request,pk):
     muscle_part =get_object_or_404(MusclePart, pk=pk)
     if request.method == 'POST':
@@ -161,6 +188,8 @@ def musclepart_update(request,pk):
     return render(request, 'workouts/musclepart_form.html', {'muscle_part': muscle_part})
 
 # DELETE VIEW - remove a musclepart
+@login_required
+
 def musclepart_delete(request, pk):
     muscle_part = get_object_or_404(MusclePart, pk=pk)
     if request.method =='POST':
@@ -169,6 +198,7 @@ def musclepart_delete(request, pk):
     return render(request, 'workouts/musclepart_confirm_delete.html', {'muscle_part': muscle_part})
 
 # SIGNUP VIEW
+
 
 def signup(request):
     error_message = ''

@@ -5,9 +5,9 @@ from workouts import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.Home.as_view(), name='home'),    
+    path('', views.home.as_view(), name='home'),    
     path('workouts/', include('workouts.urls')),
-    path('account/', include('django.contrib.auth.urls')),
-    path('accocunt/signup/', views.signup, name='signup'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', views.signup, name='signup'),
    
 ]
