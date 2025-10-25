@@ -1,8 +1,17 @@
+{% extends 'base.html' %}
+
 <!DOCTYPE html>
+{% block content %}
 <html>
 <head>
+    {% load static %}
     <title>Delete Exercise</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
+
+
+
 <body>
     <h1>Delete Exercise</h1>
 
@@ -15,3 +24,4 @@
     </form>
 </body>
 </html>
+{% block content %}

@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DRN Fitness</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     {% if not user.is_authenticated %}
-        <h1>Welcome to DRN Fitness</h1>
-        <p>Track your workouts. Stay consistent. See your progress.</p>
+    <h2>Welcome</h2>
+    <P>Track your workouts. Stay consistent. See your progress.</P>
 
-        <form action="{% url 'home' %}" method="post" class="login">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="hidden" name="next" value="{{ next }}">
-            <button type="submit">Login</button>
-        </form>
+    <form action="{% url 'home' %}" method="post" class="login">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">Login</button>
+    </form>
 
-        <p>Don't have an account?</p>
-            <a href="% url 'signup' %">Sign up here</a>
-        
-        </p>
-    {% else %}
-        <h2>Welcome back, {{ user.username }}</h2>
-        <p><a href="{% url 'workout_list' %}">View All Workouts</a></p>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    {% endif %}
-</body>
-</html>
+    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+  {% else %}
+    <h2>Welcome back, {{ user.username }}</h2>
+    <p><a href="{% url 'workout_list' %}">View All Workouts</a></p>
+  {% endif %}
+{% endblock %}

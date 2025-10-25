@@ -1,4 +1,7 @@
+
+{% extends 'base.html' %}
 <!DOCTYPE html>
+{% block content %}
 <html>
 <head>
     <title>{% if muscle_part %}Edit{% else %}Add{% endif %} Muscle Part</title>
@@ -16,3 +19,4 @@
     <p><a href="{% url 'musclepart_list' %}">Back</a></p>
 </body>
 </html>
+{% endblock %}

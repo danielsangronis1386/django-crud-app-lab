@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
+{% block content %}
 <html>
 <head>
     <title>New Workout</title>
@@ -23,3 +25,4 @@
     <p><a href="{% url 'workout_list' %}">Back to all workouts</a></p>
 </body>
 </html>
+{% endblock %}

@@ -1,4 +1,7 @@
+
+{% extends 'base.html' %}
 <!DOCTYPE html>
+{% block content %}
 <html>
 <head>
     <title>Delete Workout</title>
@@ -15,3 +18,4 @@
     <p> <a href="{% url 'workout_detail' workout.id %}"> Cancel</a></p>
 </body>
 </html>
+{% endblock %}

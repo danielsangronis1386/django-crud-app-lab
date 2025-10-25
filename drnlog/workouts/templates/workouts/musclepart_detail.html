@@ -1,4 +1,7 @@
+
+{% extends 'base.html' %}
 <!DOCTYPE html>
+{% block content %}
 <html>
 <head>
     <title>{{ muscle_part.name }}</title>
@@ -14,3 +17,4 @@
     <p><a href="{% url 'musclepart_list' %}">Back to all Muscle Parts</a></p>
 </body>
 </html>
+{% endblock %}
