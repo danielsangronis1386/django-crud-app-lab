@@ -15,7 +15,7 @@ class home(LoginView):
 @login_required
 
 def workout_list(request):
-    workouts = Workout.objects.all().order_by('-date')
+    workouts = Workout.objects.filter(user=request.user).order_by('-date')
     return render(request, 'workouts/workout_list.html', {'workouts': workouts})
 
 #DETAIL VIEW SHOW ONE WORKOUT BY ID 
@@ -35,6 +35,7 @@ def workout_create(request):
         notes = request.POST.get('notes')
 
         Workout.objects.create(
+            user=request.user,
             name=name,
             duration=duration,
             notes=notes

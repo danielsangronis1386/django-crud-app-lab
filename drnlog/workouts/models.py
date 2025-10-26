@@ -1,8 +1,9 @@
 from django.db import models
 from django.urls import reverse
-
+from django.contrib.auth.models import User
 
 class Workout(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     date = models.DateField(auto_now_add=True)
     duration = models.PositiveIntegerField(help_text="Duration in minutes")
