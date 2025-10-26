@@ -1,4 +1,42 @@
 
+.hero {
+  position: relative;
+  min-height: 70vh;
+  background: url("../images/vecteezy_man-training-with-battle-ropes_1226689.jpg") center/cover no-repeat;
+  display: grid;
+  place-items: center;
+  filter: grayscale(75%);
+}
+
+.overlay {
+  background: rgba(0,0,0,0.55);
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 680px;
+  width: min(92vw, 680px);
+}
+
+.overlay h2 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.overlay p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.login p label { color: #e6e6e6; }
+.login input[type="text"],
+.login input[type="password"] {
+  width: 100%;
+  padding: .6rem .75rem;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  background: #111;
+  color: #f2f2f2;
+}
 body {
     font-family: 'Inter', Arial, sans-serif;
     background-color: #111;

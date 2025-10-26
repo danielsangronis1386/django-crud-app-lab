@@ -211,7 +211,9 @@ def signup(request):
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
-    return render(request, "registration/signup.html", {'form': form, 'error_message': error_message})
+    return render(request, "workouts/signup.html", {'form': form, 'error_message': error_message})
+
+
 
 
 
